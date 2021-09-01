@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
         $user->num_mobile = '0969458949';
         $user->ci = '0969458949';
         $user->dateNac = '1992-07-24';
-        $user->cod_city = '0001';
+        $user->city_id = 1;
         $user->save();
 
         $user = new User();
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
         $user->num_mobile = '0969458949';
         $user->ci = '0969458949';
         $user->dateNac = '1992-07-24';
-        $user->cod_city = '0001';
+        $user->city_id = 2;
         $user->save();
     }
 }

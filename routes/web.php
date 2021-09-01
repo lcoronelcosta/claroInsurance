@@ -24,3 +24,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//admmin routes
+Route::get('/admin/users',[App\Http\Controllers\Usercontroller::class, 'index'])->name('users')->middleware('auth');
+Route::get('/admin/add-user',[App\Http\Controllers\Usercontroller::class, 'create'])->name('add-user')->middleware('auth');
+Route::get('/admin/edit-user/{user}',[App\Http\Controllers\Usercontroller::class, 'edit'])->middleware('auth');
+Route::post('/admin/ajax/estados',[App\Http\Controllers\Ajaxcontroller::class, 'estados'])->middleware('auth');
+Route::post('/admin/ajax/ciudades',[App\Http\Controllers\Ajaxcontroller::class, 'ciudades'])->middleware('auth');
