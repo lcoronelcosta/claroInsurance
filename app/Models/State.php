@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class State extends Model
 {
     use HasFactory;
+
+    //RElacion a nivel de modelo
+    public function country()
+    {
+        return $this->hasOne('App\Country');
+    }
 }
