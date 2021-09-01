@@ -5,12 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class State extends Model
 {
     use HasFactory;
-
-    //Relacion
-    public function users(){
-        return $this->hasMany(User::class);
-    }
 }
