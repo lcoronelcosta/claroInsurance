@@ -3,20 +3,20 @@
 
 
 <div class="container">
-    <form method="POST" id="form" action="{{url('admin/crear-user')}}">
+    <form method="POST" id="form" action="{{url('admin/update-user')}}">
         {!! csrf_field() !!}
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputName">Nombre</label>
                 <span class="text-danger">*</span>
-                <input type="text" class="form-control" id="inputName" name="name" minlength="3" required>
+                <input value="{{$user->name}}" type="text" class="form-control" id="inputName" name="name" minlength="3" required>
                 <p id="msgNombre" class="warnings"></p>
             </div>
             <div class="form-group col-md-6">
                 <label for="inputEmail">Email</label>
                 <span class="text-danger">*</span>
-                <input type="email" class="form-control" id="inputEmail" name="email" required>
+                <input value="{{$user->email}}" readonly type="email" class="form-control" id="inputEmail" name="email" required>
                 <p id="msgEmail" class="warnings"></p>
             </div>
             <div class="form-group col-md-6">
@@ -34,19 +34,19 @@
             <div class="form-group col-md-4">
                 <label for="dateBirth">Fecha de nacimiento</label>
                 <span class="text-danger">*</span>
-                <input type="date" class="form-control" id="dateBirth" name="dateNac" max="{{ 'now' | date('Y') }}" required>
+                <input value="{{$user->dateNac}}" type="date" class="form-control" id="dateBirth" name="dateNac" max="{{ 'now' | date('Y') }}" required>
                 <p id="msgDate" class="warnings"></p>
             </div>
             <div class="form-group col-md-4">
                 <label for="inputCel">Celular</label>
-                <input type="number" class="form-control" id="inputCel"  name="num_mobile">
+                <input value="{{$user->num_mobile}}" type="number" class="form-control" id="inputCel"  name="num_mobile">
                 <p id="msgCel" class="warnings"></p>
             </div>
 
             <div class="form-group col-md-4">
                 <label for="inputCc">Cedula</label>
                 <span class="text-danger">*</span>
-                <input type="text" class="form-control" id="inputCc" name="ci" require>
+                <input value="{{$user->ci}}" readonly type="text" class="form-control" id="inputCc" name="ci" require>
                 <p id="msgCc" class="warnings"></p>
             </div>
             
@@ -57,9 +57,12 @@
 
                 <select name="inputCountry" id="countries" class="form-control select2">
                     <optgroup label="Selecciona un país">
-                        <option value="" selected>-</option>
                         @foreach ($paises as $pais)
-                        <option value="{{ $pais->id }}">{{ $pais->nombre }}</option>
+                            @if($pais->id === $user->city->id)
+                                <option value="{{ $pais->id }}" selected>{{ $pais->nombre }}</option>
+                            @else
+                                <option value="{{ $pais->id }}">{{ $pais->nombre }}</option>
+                            @endif
                         @endforeach
                     </optgroup>
                 </select>

@@ -70,6 +70,19 @@
                                 </li>
                             @endif
                         @else
+                            @if(Auth::user()->role->nombre == 'Adminstrador')
+                            <li class="nav-item">
+                                <a id="navbarDropdown" class="nav-link" href="{{ route('users') }}" role="button">
+                                    USUARIOS
+                                </a>
+                            </li>
+                            @endif
+
+                            <li class="nav-item">
+                                <a id="navbarDropdown" class="nav-link" href="{{ route('mails') }}" role="button">
+                                    MIS EMAILS
+                                </a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -86,12 +99,6 @@
                                         @csrf
                                     </form>
                                 </div>
-                            </li>
-
-                            <li class="nav-item">
-                                <a id="navbarDropdown" class="nav-link" href="{{ route('users') }}" role="button">
-                                    USUARIOS
-                                </a>
                             </li>
                         @endguest
                     </ul>

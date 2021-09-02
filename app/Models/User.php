@@ -45,6 +45,11 @@ class User extends Authenticatable
     //Relacion a nivel de los modelos
     public function city()
     {
-        return $this->hasOne('App\City');
+        return $this->belongsTo(City::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 }

@@ -12,12 +12,12 @@ class Country extends Model
     //Relacion a nivel de modelos
     public function cities()
     {
-        return $this->hasMany('App\City');
+        return $this->hasMany(City::class);
     }
 
     //Relacion a nivel de modelos
     public function states()
     {
-        return $this->hasMany('App\State');
+        return $this->hasMany(State::class);
     }
 }

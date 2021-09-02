@@ -12,6 +12,6 @@ class State extends Model
     //RElacion a nivel de modelo
     public function country()
     {
-        return $this->hasOne('App\Country');
+        return $this->belongsTo(Country::class);
     }
 }

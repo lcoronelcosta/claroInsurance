@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use App\Models\Country;
 
 class UserController extends Controller
 {
@@ -14,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')->paginate(1); //Paginacion por default
+        $users = User::paginate(2); //Paginacion por default
         return view('/admin/listUsers', compact(
             'users',
         ));
@@ -41,7 +43,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $user = new User();
+        $user->role_id = 2;
+        $user->email = $request->get('email');
+        $user->password = bcrypt($request->get('password'));
+        $user->name = $request->get('name');
+        $user->num_mobile = $request->get('num_mobile');
+        $user->ci = $request->get('ci');
+        $user->dateNac = $request->get('dateNac');
+        $user->city_id = $request->get('city_id');
+        $user->save();
+
+        return redirect('/admin/users');
     }
 
     /**
@@ -63,7 +77,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $paises = Country::all();
+        return view('/admin/editUser', compact(
+            'user',
+            'paises'
+        ));
     }
 
     /**
@@ -75,7 +94,17 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->email = $request->get('email');
+        $user->password = bcrypt($request->get('password'));
+        $user->name = $request->get('name');
+        $user->num_mobile = $request->get('num_mobile');
+        $user->ci = $request->get('ci');
+        $user->dateNac = $request->get('dateNac');
+        $user->city_id = $request->get('city_id');
+        $user->save();
+
+        return redirect('/admin/users');
     }
 
     /**
@@ -86,6 +115,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return redirect('/admin/users');
     }
 }
