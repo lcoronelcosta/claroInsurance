@@ -29,6 +29,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="http://momentjs.com/downloads/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js" defer></script>
+    <script src="https://cdn.datatables.net/1.11.0/js/dataTables.bootstrap4.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -70,7 +73,7 @@
                                 </li>
                             @endif
                         @else
-                            @if(Auth::user()->role->nombre == 'Adminstrador')
+                            @if(Auth::user()->role->nombre == 'admin')
                             <li class="nav-item">
                                 <a id="navbarDropdown" class="nav-link" href="{{ route('users') }}" role="button">
                                     USUARIOS

@@ -13,6 +13,7 @@ class AjaxController extends Controller
         $this->middleware('auth');
     }
 
+    //Peticion Ajax que devuelve los estados en base a un pais
     public function estados(Request $request)
     {
         $states = DB::table("states")->where([
@@ -21,11 +22,10 @@ class AjaxController extends Controller
         
     	$response = new JsonResponse();
     	$response->setData($states);
-        //echo "<pre>"; var_dump($response); exit();
         return ['success' => true, 'data' => $states];
-    	//return $response;
     }
 
+    //Peticion Ajax que devuelve las ciudades en base a un estado
     public function ciudades(Request $request)
     {
         $cities = DB::table("cities")->where([
@@ -34,8 +34,6 @@ class AjaxController extends Controller
         
     	$response = new JsonResponse();
     	$response->setData($cities);
-        //echo "<pre>"; var_dump($response); exit();
         return ['success' => true, 'data' => $cities];
-    	//return $response;
     }
 }

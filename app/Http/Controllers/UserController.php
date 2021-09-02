@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Country;
+use DateTime;
 
 class UserController extends Controller
 {
@@ -17,6 +18,13 @@ class UserController extends Controller
     public function index()
     {
         $users = User::paginate(2); //Paginacion por default
+        //Edades
+        foreach ($users as $user) {
+            $nacimiento = new DateTime($user->dateNac);
+            $ahora = new DateTime(date("Y-m-d"));
+            $diferencia = $ahora->diff($nacimiento);
+            $user->edad = $diferencia->format("%y");
+        }
         return view('/admin/listUsers', compact(
             'users',
         ));
@@ -30,8 +38,13 @@ class UserController extends Controller
     public function create()
     {
         $paises = DB::table('countries')->get(); //Paginacion por default
+        //Fecha maxima
+        $anio = date("Y") - 18;
+        $fecha = date("m-d");
         return view('/admin/createUser', compact(
             'paises',
+            'anio',
+            'fecha'
         ));
     }
 
@@ -79,9 +92,14 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $paises = Country::all();
+        //Fecha maxima
+        $anio = date("Y") - 18;
+        $fecha = date("m-d");
         return view('/admin/editUser', compact(
             'user',
-            'paises'
+            'paises',
+            'anio',
+            'fecha'
         ));
     }
 
@@ -94,7 +112,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
+        $user = User::find($id);
         $user->email = $request->get('email');
         $user->password = bcrypt($request->get('password'));
         $user->name = $request->get('name');

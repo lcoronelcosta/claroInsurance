@@ -3,7 +3,7 @@
 
 
 <div class="container">
-    <form method="POST" id="form" action="{{url('admin/update-user')}}">
+    <form method="POST" id="form" action="{{url('admin/update-user')}}/{{$user->id}}">
         {!! csrf_field() !!}
 
         <div class="form-row">
@@ -34,7 +34,7 @@
             <div class="form-group col-md-4">
                 <label for="dateBirth">Fecha de nacimiento</label>
                 <span class="text-danger">*</span>
-                <input value="{{$user->dateNac}}" type="date" class="form-control" id="dateBirth" name="dateNac" max="{{ 'now' | date('Y') }}" required>
+                <input value="{{$user->dateNac}}" type="date" class="form-control" id="dateBirth" name="dateNac" max="{{$anio}}-{{$fecha}}" required>
                 <p id="msgDate" class="warnings"></p>
             </div>
             <div class="form-group col-md-4">

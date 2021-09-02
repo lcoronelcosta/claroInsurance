@@ -34,7 +34,7 @@
             <div class="form-group col-md-4">
                 <label for="dateBirth">Fecha de nacimiento</label>
                 <span class="text-danger">*</span>
-                <input type="date" class="form-control" id="dateBirth" name="dateNac" max="{{ 'now' | date('Y') }}" required>
+                <input type="date" class="form-control" id="dateBirth" name="dateNac" max="{{$anio}}-{{$fecha}}" required>
                 <p id="msgDate" class="warnings"></p>
             </div>
             <div class="form-group col-md-4">

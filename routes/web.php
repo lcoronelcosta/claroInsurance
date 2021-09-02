@@ -30,7 +30,7 @@ Route::get('/admin/users',[App\Http\Controllers\Usercontroller::class, 'index'])
 Route::get('/admin/add-user',[App\Http\Controllers\Usercontroller::class, 'create'])->name('add-user')->middleware('auth');
 Route::get('/admin/edit-user/{user}',[App\Http\Controllers\Usercontroller::class, 'edit'])->name('edit-user')->middleware('auth');
 Route::post('/admin/crear-user',[App\Http\Controllers\Usercontroller::class, 'store'])->middleware('auth');
-Route::post('/admin/update-user',[App\Http\Controllers\Usercontroller::class, 'update'])->name('update-user')->middleware('auth');
+Route::post('/admin/update-user/{id}',[App\Http\Controllers\Usercontroller::class, 'update'])->name('update-user')->middleware('auth');
 Route::get('/admin/delete-user/{user}',[App\Http\Controllers\Usercontroller::class, 'destroy'])->name('delete-user')->middleware('auth');
 Route::post('/admin/ajax/estados',[App\Http\Controllers\Ajaxcontroller::class, 'estados'])->middleware('auth');
 Route::post('/admin/ajax/ciudades',[App\Http\Controllers\Ajaxcontroller::class, 'ciudades'])->middleware('auth');
@@ -39,4 +39,7 @@ Route::post('/admin/ajax/ciudades',[App\Http\Controllers\Ajaxcontroller::class, 
 Route::get('/admin/crear-email',[App\Http\Controllers\EmailController::class, 'create'])->name('crear-email')->middleware('auth');
 Route::post('/admin/enviar-email',[App\Http\Controllers\EmailController::class, 'store'])->name('enviar-email')->middleware('auth');
 Route::get('/admin/mails',[App\Http\Controllers\EmailController::class, 'index'])->name('mails')->middleware('auth');
+Route::get('/admin/ver-email/{email}',[App\Http\Controllers\EmailController::class, 'show'])->name('ver-email')->middleware('auth');
 
+//Route Artisan para depachar cola de Correos
+Route::get('/admin/email-despachar',[App\Http\Controllers\EmailController::class, 'despachar'])->name('despachar')->middleware('auth');

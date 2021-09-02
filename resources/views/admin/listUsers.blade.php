@@ -7,6 +7,7 @@
             <tr>
                 <th>N</th>
                 <th>Nombre</th>
+                <th>Edad</th>
                 <th>Email</th>
                 <th>Celular</th>
                 <th>Identificación</th>
@@ -23,6 +24,7 @@
             <tr>
                 <td>{{$count}}</td>
                 <td>{{$user->name}}</td>
+                <td>{{$user->edad}}</td>
                 <td>{{$user->email}}</td>
                 <td>{{$user->num_mobile}}</td>
                 <td>{{$user->ci}}</td>
@@ -47,5 +49,9 @@
         </div>
       </div>
 </div>
-
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+</script>
 @endsection
